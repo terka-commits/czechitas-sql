@@ -18,7 +18,7 @@ ORDER BY PriceNew DESC;
 
 --- 3) Vyberte všechny prodeje uskutečněné v únoru a jejich tržba je mezi 1800 a 1900. Zobrazte jen sloupce productid, calendarid a tržba za jeden kus a vhodně je česky pojmenujte.
 
-SELECT productid AS ID_Produktu, calendarid AS Kalendar, revenue AS Trzba
+SELECT productid AS ID_Produktu, calendarid AS Kalendar, (revenue / units) AS Trzba za kus
 FROM sales 
 WHERE revenue BETWEEN 1800 AND 1900
 AND (calendarID LIKE '%-02-%');
