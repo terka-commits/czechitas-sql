@@ -124,10 +124,26 @@ AND monthname LIKE 'J%' OR monthname like'%a%';
 
 /* Úkol navíc */
 -- Najděte všechny produkty (productid), které byly vždy prodány za stejnou tržbu a počet prodejů je větší než 4 
-SELECT productid, COUNT(
-FROM products
-GROUP BY product
+
+SELECT productid, revenue/Units AS Cena_za_kus, COUNT(productid) AS pocet_prodeju
+FROM sales
+GROUP BY productid, Cena_za_kus
+HAVING pocet_prodeju > 4;
+
+SELECT 
+    productid,
+    COUNT(*) AS pocet_prodeju,
+    MIN(revenue * 1.0 / Units) AS cena_za_kus
+FROM sales
+GROUP BY productid
+HAVING 
+    COUNT(*) > 4
+    AND COUNT(DISTINCT revenue * 1.0 / Units) = 1;
+
 
 /* Společná práce - INNER JOIN */
 -- Najdi TOP 100 prodejů podle příjmů a k nim příslušné informace z tabulky Cities.
 -- Najdi prodeje pro město se zip 33906 a zjisti o jaké jde město
+
+
+
